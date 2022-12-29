@@ -1,2 +1,8 @@
 # nodejs
 node_modules/
+
+# git
+.git/
+
+# Dockerfile
+Dockerfile
