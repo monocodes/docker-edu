@@ -2,6 +2,9 @@
 __pycache__/
 .python-version
 
+# nodejs
+node_modules/
+
 # directories
 .vscode/
 images/
