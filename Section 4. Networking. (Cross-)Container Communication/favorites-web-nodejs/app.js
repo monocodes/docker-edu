@@ -67,7 +67,9 @@ app.get('/people', async (req, res) => {
   }
 });
 
-mongoose.connect(
+app.listen(3000)
+
+/* mongoose.connect(
   'mongodb://localhost:27017/swfavorites',
   { useNewUrlParser: true },
   (err) => {
@@ -77,4 +79,4 @@ mongoose.connect(
       app.listen(3000);
     }
   }
-);
+); */
