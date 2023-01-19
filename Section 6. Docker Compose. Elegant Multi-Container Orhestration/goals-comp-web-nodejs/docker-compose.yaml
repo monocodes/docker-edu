@@ -3,17 +3,49 @@ services:
   mongodb:
     image: 'mongo'
     volumes:
-      - data:/data/db
+      - data:/data/db # named volume, need to be
+      # in the end of docker file
     environment:
-      # MONGO_INITDB_ROOT_USERNAME: max
       - MONGO_INITDB_ROOT_USERNAME=max
       - MONGO_INITDB_ROOT_PASSWORD=secret
-    #env_file:
+      
+      # could use this form
+      # MONGO_INITDB_ROOT_USERNAME: max
+    
+    # you could specify .env file with envs here 
+    # env_file:
     #  - ./env/mongo.env
-    #networks:
+
+    # you could specify networks here
+    # networks:
     #  - goals-net
+
   backend:
-  frontend:
+    build: ./backend
+    ports:
+      - '80:80'
+    volumes:
+      - logs:/app/logs # named volume
+      - ./backend:/app # bind mount,relative path
+      - /app/node_modules # unnamed volume
+    env_file:
+      - ./env/backend.env
+    depends_on:
+      - mongodb
+
+    # if Dockerfile has been renamed or in the
+    # different dir, or you want to use args,
+    # you can use context: and agrs: be sure
+    # that Dockerfile have all things it needs
+    # in the same dir
+    # build:
+    #   context: ./backend
+    #   dockerfile: Dockerfile-dev
+    #   args:
+    #     some-agr: 1
+
+  # frontend:
 
 volumes:
-  data:
+  data: # named volume
+  logs: # named volume
