@@ -20,7 +20,10 @@ services:
       #performance
     ports:
       - '3000:9000'
-  # mysql:
+  mysql:
+    image: mysql:5.7
+    env_file:
+      - ./env/mysql.env
   # composer:
   # artisan:
   # npm:
