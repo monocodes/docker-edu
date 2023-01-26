@@ -7,7 +7,19 @@ services:
       - '8000:80'
     volumes:
       - ./nginx/nginx.conf:/etc/nginx/nginx.conf:ro
-  # php:
+  php:
+    build:
+      context: ./dockerfiles
+      dockerfile: php.dockerfile
+    volumes:
+      - ./src:/var/www/html:delegated
+      # :delegated - is the optimization
+      #if the container needs to write some data
+      #to the folder back to the host machine
+      #it will precces it in batches for better
+      #performance
+    ports:
+      - '3000:9000'
   # mysql:
   # composer:
   # artisan:
