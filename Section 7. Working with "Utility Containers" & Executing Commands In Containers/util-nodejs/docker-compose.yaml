@@ -6,3 +6,4 @@ services:
     tty: true
     volumes:
       - ./:/app
+    image: wanderingmono/docker-s7:util-nodejs-v0.3-entry-comp
