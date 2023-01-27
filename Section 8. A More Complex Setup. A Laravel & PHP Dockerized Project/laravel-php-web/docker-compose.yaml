@@ -16,6 +16,7 @@ services:
     build:
       context: ./dockerfiles
       dockerfile: php.dockerfile
+    image: wanderingmono/docker-s8:laravel-php-web-php-v0.1
     volumes:
       - ./src:/var/www/html:delegated
       # :delegated - is the optimization
@@ -36,6 +37,7 @@ services:
     build:
       context: ./dockerfiles
       dockerfile: composer.dockerfile
+    image: wanderingmono/docker-s8:laravel-php-web-composer-v0.1
     volumes:
       - ./src:/var/www/html
   
@@ -43,6 +45,7 @@ services:
     build:
       context: ./dockerfiles
       dockerfile: php.dockerfile
+    image: wanderingmono/docker-s8:laravel-php-web-artisan-v0.1
     volumes:
       - ./src:/var/www/html
     entrypoint: ["php", "/var/www/html/artisan"]
