@@ -27,8 +27,8 @@ services:
       - '3000:9000'
 
   mysql:
-    platform: linux/x86_64
-    image: mysql:5.7
+    # platform: linux/x86_64
+    image: mysql
     env_file:
       - ./env/mysql.env
 
@@ -38,5 +38,20 @@ services:
       dockerfile: composer.dockerfile
     volumes:
       - ./src:/var/www/html
-  # artisan:
-  # npm:
+  
+  artisan:
+    build:
+      context: ./dockerfiles
+      dockerfile: php.dockerfile
+    volumes:
+      - ./src:/var/www/html
+    entrypoint: ["php", "/var/www/html/artisan"]
+    # entrypoint disables RUN command in
+    # dockerfile and executes itself command
+
+  npm:
+    image: node:14
+    working_dir: /var/www/html
+    entrypoint: ["npm"]
+    volumes:
+      - ./src:/var/www/html

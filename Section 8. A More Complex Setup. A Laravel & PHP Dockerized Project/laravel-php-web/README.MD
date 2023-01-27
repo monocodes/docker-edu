@@ -197,3 +197,13 @@ services:
 # run the containers and rebuild the images if
 # something changed in Dockerfiles 
 docker compose up -d --build server
+
+
+
+
+*************************************************
+120. Adding More Utility Containers
+*************************************************
+
+# run and check the artisan container
+docker compose run --rm artisan migrate
