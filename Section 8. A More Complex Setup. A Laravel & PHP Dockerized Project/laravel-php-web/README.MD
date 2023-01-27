@@ -207,3 +207,34 @@ docker compose up -d --build server
 
 # run and check the artisan container
 docker compose run --rm artisan migrate
+
+
+
+
+*************************************************
+120. Fixing the initial setup based on videos
+*************************************************
+
+Actually the whole setup on macOS m1 could be based on videos and needs just these fixes:
+
+# php.dockerfile
+FROM php:8.1-fpm-alpine
+
+# command for running composer utility container
+# and creating lavarel project
+docker-compose run --rm composer create-project --prefer-dist laravel/laravel:^8.0 .
+
+# use platform instruction on mysql image
+mysql:
+    platform: linux/x86_64
+    image: mysql:5.7
+    env_file:
+      - ./env/mysql.env
+
+# don't forget to update the db creds in 
+# ./scr/.env and also update DB_HOST=127.0.0.1
+DB_DATABASE=homestead
+DB_USERNAME=homestead
+DB_PASSWORD=secret
+
+DB_HOST=mysql
