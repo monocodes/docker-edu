@@ -2,7 +2,11 @@ version: "3.8"
 
 services:
   server:
-    image: nginx:stable-alpine
+    # image: nginx:stable-alpine
+    build:
+      context: .
+      dockerfile: dockerfiles/nginx.dockerfile
+    image: wanderingmono/docker-s8:laravel-php-web-nginx-v0.2-fixed-dpl
     ports:
       - '8000:80'
     volumes:
@@ -14,9 +18,9 @@ services:
 
   php:
     build:
-      context: ./dockerfiles
-      dockerfile: php.dockerfile
-    image: wanderingmono/docker-s8:laravel-php-web-php-v0.1
+      context: .
+      dockerfile: dockerfiles/php.dockerfile
+    image: wanderingmono/docker-s8:laravel-php-web-php-v0.2-fixed-dpl
     volumes:
       - ./src:/var/www/html:delegated
       # :delegated - is the optimization
@@ -24,11 +28,11 @@ services:
       #to the folder back to the host machine
       #it will precces it in batches for better
       #performance
-    ports:
-      - '3000:9000'
+    # ports:
+    #   - '3000:9000'
 
   mysql:
-    # platform: linux/x86_64
+    platform: linux/x86_64
     image: mysql
     env_file:
       - ./env/mysql.env
@@ -37,15 +41,15 @@ services:
     build:
       context: ./dockerfiles
       dockerfile: composer.dockerfile
-    image: wanderingmono/docker-s8:laravel-php-web-composer-v0.1
+    image: wanderingmono/docker-s8:laravel-php-web-composer-v0.2-fixed-dpl
     volumes:
       - ./src:/var/www/html
   
   artisan:
     build:
-      context: ./dockerfiles
-      dockerfile: php.dockerfile
-    image: wanderingmono/docker-s8:laravel-php-web-artisan-v0.1
+      context: .
+      dockerfile: dockerfiles/php.dockerfile
+    image: wanderingmono/docker-s8:laravel-php-web-artisan-v0.2-fixed-dpl
     volumes:
       - ./src:/var/www/html
     entrypoint: ["php", "/var/www/html/artisan"]
