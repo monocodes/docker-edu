@@ -1,12 +1,13 @@
 version: '3.8'
 services:
-  mongodb:
-    image: 'mongo'
-    volumes:
-      - data:/data/db
-    env_file:
-      - ./env/mongo.env
+  # mongodb:
+  #   image: 'mongo'
+  #   volumes:
+  #     - data:/data/db
+  #   env_file:
+  #     - ./env/mongo.env
   backend:
+    image: wanderingmono/docker-s9:goals-web-nodejs-dep-v0.1-arm64
     build: ./backend
     ports:
       - '80:80'
@@ -15,8 +16,8 @@ services:
       - /app/node_modules
     env_file:
       - ./env/backend.env
-    depends_on:
-      - mongodb
+    # depends_on:
+    #   - mongodb
 
-volumes:
-  data:
+# volumes:
+#   data:
