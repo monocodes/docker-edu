@@ -2,12 +2,19 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: second-app-deployment
+  labels:
+    group: example
 spec:
   replicas: 1
   selector:
     matchLabels:
       app: second-app
       tier: backend
+    # matchExpressions:
+    #   - {key: app, operator: In, values: [second-app, first-app]}
+    # matchExpressions is more powerful and
+    # complex method to work with labels and
+    # selectors
   template:
     metadata:
       labels:
