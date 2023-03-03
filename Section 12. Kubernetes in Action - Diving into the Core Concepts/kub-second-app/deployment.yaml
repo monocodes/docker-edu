@@ -24,6 +24,8 @@ spec:
       containers:
         - name: second-node
           image: wanderingmono/docker-s12:kub-first-app-v2
+          imagePullPolicy: Always
+          # imagePullPolicy: Never
           livenessProbe:
             httpGet:
               path: /
