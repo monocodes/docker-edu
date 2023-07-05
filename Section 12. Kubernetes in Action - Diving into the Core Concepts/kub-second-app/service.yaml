@@ -12,7 +12,7 @@ spec:
       port: 80
       targetPort: 8080
       # to expose multiple ports
-    # - protocolol: 'TCP'
+    # - protocol: 'TCP'
     #   port: 443
     #   targetPort: 443
   type: LoadBalancer

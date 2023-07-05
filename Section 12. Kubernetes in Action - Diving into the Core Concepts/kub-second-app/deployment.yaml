@@ -25,6 +25,8 @@ spec:
         - name: second-node
           image: wanderingmono/docker-s12:kub-first-app-v2
           imagePullPolicy: Always
+          # to pull image even if tag is not changed
+          # or just use tag :latest to always pull image
           # imagePullPolicy: Never
           livenessProbe:
             httpGet:
